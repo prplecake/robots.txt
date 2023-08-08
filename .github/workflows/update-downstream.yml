@@ -1,0 +1,26 @@
+name: Update downstream repos
+
+on:
+  push:
+    branches: [ "master" ]
+  workflow_dispatch:
+
+jobs:
+  update-prplecake:
+    uses: ./.github/workflows/call-workflow-dispatch.yml
+    with:
+      repo-owner: prplecake
+      repo-name: prplecake.github.io
+      workflow-name: update-submodule.yml
+      ref: master
+    secrets:
+      token: ${{ secrets.GIT_TOKEN }}
+  update-compostintraining:
+    uses: ./.github/workflows/call-workflow-dispatch.yml
+    with:
+      repo-owner: compostintraining
+      repo-name: compostintraining.github.io
+      workflow-name: update-submodule.yml
+      ref: master
+    secrets:
+      token: ${{ secrets.GIT_TOKEN }}

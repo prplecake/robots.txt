@@ -1,0 +1,35 @@
+name: Call workflow dispatch
+
+on:
+  workflow_call:
+    inputs:
+      repo-owner:
+        required: true
+        type: string
+      repo-name:
+        required: true
+        type: string
+      workflow-name:
+        required: true
+        type: string
+      ref:
+        required: true
+        type: string
+    secrets:
+      token:
+        required: true
+
+jobs:
+  call-workflow-dispatch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.token }}
+          script: |
+            await github.rest.actions.createWorkflowDispatch({
+             owner: '${{ inputs.repo-owner }}',
+             repo: '${{ inputs.repo-name }}',
+             workflow_id: '${{ inputs.workflow-name }}',
+             ref: '${{ inputs.ref }}'
+            })
