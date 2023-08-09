@@ -15,6 +15,15 @@ jobs:
       ref: master
     secrets:
       token: ${{ secrets.GIT_TOKEN }}
+  update-tools-splat-soy:
+    uses: ./.github/workflows/call-workflow-dispatch.yml
+    with:
+      repo-owner: prplecake
+      repo-name: tools.splat.soy
+      workflow-name: update-submodule.yml
+      ref: master
+    secrets:
+      token: ${{ secrets.GIT_TOKEN }}
   update-compostintraining:
     uses: ./.github/workflows/call-workflow-dispatch.yml
     with:
